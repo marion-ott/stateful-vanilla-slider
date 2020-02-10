@@ -1,0 +1,8 @@
+li {
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  cursor: pointer;
+  list-style: none;
+  margin-bottom: 10px;
+}
