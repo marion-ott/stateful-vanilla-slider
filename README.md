@@ -1,0 +1,1 @@
+# Statefull Vanilla slider
