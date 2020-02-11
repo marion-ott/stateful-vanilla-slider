@@ -1,14 +1,13 @@
 export default class Slide {
-  constructor(text, img) {
-    this.text = text
+  constructor(alt, img) {
+    this.alt = alt
     this.img = img
   }
 
-  render() {
+  render(className) {
     return `
-      <div class='Slider_slide'>
-        <img src='${this.img}' alt=''/>
-        <p>${this.text}</p>
+      <div class='${className}'>
+        <img src='${this.img}' alt='${this.alt}'/>
       </div>
     `
   }

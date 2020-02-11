@@ -13,7 +13,7 @@ data.forEach(({text, img}) => {
 var slider = new Slider(initialIndex, slides)
 
 function update() {
-  document.querySelector('body').innerHTML = slider.render()
+  document.getElementById('root').innerHTML = slider.render()
 }
 
 window.addEventListener('setState', update)

@@ -4,7 +4,7 @@ export default class Slider {
       index,
       children
     }
-    
+
     document.addEventListener('click', e => {
       e.stopPropagation()
 
@@ -18,25 +18,29 @@ export default class Slider {
   setState = index => {
     this.state = {
       ...this.state,
-      index
+      index: Number(index)
     }
     dispatchEvent(stateUpdated)
   }
 
   render() {
     const {index, children} = this.state
+
     return `
+      <h2>Current index is : ${index}</h2>
       <div class='Slider'>
-        <h2>Current index is : ${index}</h2>
-        <div class='Slider_slides'>
-          ${children.map(child => child.render()).join('')}
-        </div>
-        <ul class='Slider_dots'>
-          ${children
-            .map((_, i) => `<li class=${`Slider_dot${i}`} data-index=${i}></li>`)
-            .join('')}
-        </ul>
+        ${children.map((child, i) => {
+          const className = index === i ? ' --active' : ''
+          return child.render(`Slider_slide${className}`)
+        }).join('')}
       </div>
+      <ul class='Slider_dots'>
+        ${children
+          .map((_, i) => {
+            const className = index === i ? ' --active' : ''
+            return `<li class='${`Slider_dot${className}`}' data-index=${i}></li>`
+          }).join('')}
+      </ul>
     `
   }
 }
