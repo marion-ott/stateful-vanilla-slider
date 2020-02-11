@@ -4,7 +4,6 @@ export default class Slider {
       index,
       children
     }
-    this.listener = null
   }
 
   setState = (index, children = this.state.children) => {
