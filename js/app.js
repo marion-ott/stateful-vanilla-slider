@@ -16,10 +16,7 @@ function update() {
   document.getElementById('root').innerHTML = slider.render()
 }
 
-window.addEventListener('setState', update)
-update()
-
-function addCat(e) {
+const addCat = (e) => {
   e.preventDefault()
   const inputs = e.target.querySelectorAll('input')
   const newCat = {}
@@ -29,4 +26,7 @@ function addCat(e) {
 }
 
 const form = document.getElementById('form')
-form.addEventListener('submit', (e) => addCat(e))
+form.addEventListener('submit', addCat)
+
+window.addEventListener('setState', update)
+update()

@@ -1,4 +1,7 @@
-h2 {
+h2,
+h3,
+form,
+.Slider_nav {
   text-align: center;
 }
 
@@ -40,15 +43,19 @@ h2 {
   -webkit-box-pack: center;
           justify-content: center;
   margin: 0 auto;
+  padding: 0;
 }
 
 li.Slider_dot {
-  width: 30px;
-  height: 30px;
-  background-color: red;
   opacity: 0.5;
   list-style: none;
   cursor: pointer;
+}
+
+li.Slider_dot:after {
+  content: '😿';
+  font-size: 35px;
+  display: block;
 }
 
 li.Slider_dot:not(:last-child) {
@@ -57,4 +64,18 @@ li.Slider_dot:not(:last-child) {
 
 li.Slider_dot.--active {
   opacity: 1;
+}
+
+li.Slider_dot.--active:after {
+  content: '🙀';
+}
+
+input {
+  padding: 5px 10px;
+  font-size: 18px;
+}
+
+button {
+  font-size: 35px;
+  cursor: pointer;
 }
