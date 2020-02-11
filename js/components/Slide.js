@@ -1,5 +1,5 @@
 export default class Slide {
-  constructor(alt, img) {
+  constructor({alt, img}) {
     this.alt = alt
     this.img = img
   }

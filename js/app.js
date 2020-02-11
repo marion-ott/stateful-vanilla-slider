@@ -5,8 +5,8 @@ import Slide from './components/Slide.js'
 const initialIndex = 0
 const slides = []
 
-data.forEach(({text, img}) => {
-  const slide = new Slide(text, img)
+data.forEach(el => {
+  const slide = new Slide(el)
   slides.push(slide)
 })
 
@@ -18,3 +18,15 @@ function update() {
 
 window.addEventListener('setState', update)
 update()
+
+function addCat(e) {
+  e.preventDefault()
+  const inputs = e.target.querySelectorAll('input')
+  const newCat = {}
+  Array.from(inputs).forEach(input => newCat[input.name] = input.value )
+  slides.push(new Slide(newCat))
+  slider.setState(slider.state.index, slides)
+}
+
+const form = document.getElementById('form')
+form.addEventListener('submit', (e) => addCat(e))

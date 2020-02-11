@@ -7,7 +7,7 @@ export default class Slider {
 
     document.addEventListener('click', e => {
       e.stopPropagation()
-
+      
       if (e.target.dataset.index) {
         const id = e.target.dataset.index
         this.setState(id)
@@ -15,11 +15,16 @@ export default class Slider {
     })
   }
 
-  setState = index => {
+  setState = (index, children = this.state.children) => {
+    if(!children && !index) {
+      return
+    }
+
     this.state = {
-      ...this.state,
+      children,
       index: Number(index)
     }
+
     dispatchEvent(stateUpdated)
   }
 
