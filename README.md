@@ -1,1 +1,1 @@
-# Statefull Vanilla slider
+# Stateful Vanilla slider
