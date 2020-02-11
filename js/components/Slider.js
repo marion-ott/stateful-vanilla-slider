@@ -4,32 +4,7 @@ export default class Slider {
       index,
       children
     }
-
-    document.addEventListener('click', e => {
-      e.stopPropagation()
-      
-      if(!e.target.dataset.index && !e.target.dataset.direction) {
-        return
-      }
-      
-      let id
-      if (e.target.dataset.index) {
-        id = e.target.dataset.index * 1
-      } else if(e.target.dataset.direction) {
-        const {index, children} = this.state
-        switch (e.target.dataset.direction) {
-          case 'prev':
-            id = index > 0 ? index - 1 : children.length - 1
-            break;
-          case 'next':
-            id = index < children.length - 1 ? index + 1 : 0
-            break;
-          default:
-            break;
-        }
-      }
-      this.setState(id)
-    })
+    this.listener = null
   }
 
   setState = (index, children = this.state.children) => {
@@ -43,6 +18,37 @@ export default class Slider {
     }
 
     dispatchEvent(stateUpdated)
+  }
+
+  dispatchActions = e => {    
+    let id
+    const { index, children } = this.state
+
+    switch (e.target.dataset.action) {
+      case 'updateIndex':
+        id = e.target.dataset.index * 1
+        break
+      case 'next':
+        id = index < children.length - 1 ? index + 1 : 0
+        break
+      case 'prev':
+        id = index > 0 ? index - 1 : children.length - 1
+        break
+    }
+
+    this.setState(id)
+  }
+
+  setListeners = () => {
+    const btns = document.querySelectorAll('.listener')
+    
+    const listener = (e) => {
+      this.dispatchActions(e)
+    }
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', listener)
+    })
   }
 
   render() {
@@ -62,13 +68,13 @@ export default class Slider {
         ${children
           .map((_, i) => {
             const className = index === i ? ' --active' : ''
-            return `<li class='${`Slider_dot${className}`}' data-index=${i}></li>`
+            return `<li class='${`Slider_dot${className} listener`}' data-action='updateIndex' data-index=${i}></li>`
           })
           .join('')}
       </ul>
       <div class='Slider_nav'>
-        <button data-direction='prev'>Prev</button>
-        <button data-direction='next'>Next</button>
+        <button class='listener' data-action='prev'>Prev</button>
+        <button class='listener' data-action='next'>Next</button>
       </div>
     `
   }

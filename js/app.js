@@ -10,23 +10,24 @@ data.forEach(el => {
   slides.push(slide)
 })
 
-var slider = new Slider(initialIndex, slides)
+const slider = new Slider(initialIndex, slides)
 
-function update() {
+const update = () => {
   document.getElementById('root').innerHTML = slider.render()
+  slider.setListeners()
 }
 
-const addCat = (e) => {
+window.addEventListener('setState', update)
+update()
+
+const addCat = e => {
   e.preventDefault()
   const inputs = e.target.querySelectorAll('input')
   const newCat = {}
-  Array.from(inputs).forEach(input => newCat[input.name] = input.value )
+  Array.from(inputs).forEach(input => (newCat[input.name] = input.value))
   slides.push(new Slide(newCat))
   slider.setState(slider.state.index, slides)
 }
 
 const form = document.getElementById('form')
 form.addEventListener('submit', addCat)
-
-window.addEventListener('setState', update)
-update()
