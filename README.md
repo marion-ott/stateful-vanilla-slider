@@ -1,5 +1,6 @@
 # Stateful Vanilla slider
 
+### Created for a job application technical test, goal was to create a React like vanilla slider
 ```shell
 $ git clone https://github.com/marion-ott/stateful-vanilla-slider.git
 $ mkdir stateful-vanilla-slider
